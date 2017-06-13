@@ -1,0 +1,30 @@
+body {
+	background-color: #d04949;
+}
+
+h1.jumbotron {
+	text-align: center;
+	text-shadow: 2px 2px black;
+	color: #FFF;
+	background: transparent;
+}
+
+select option {
+	text-align: center;
+}
+
+.img-responsive {
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
+
+.custom_nav{
+	max-width: 50%;
+	height: auto;
+}
+
+.page-header .name_logo{
+	max-width: 33%;
+	height: auto;
+}

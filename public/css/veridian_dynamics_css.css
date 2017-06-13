@@ -1,0 +1,31 @@
+h1 {
+	text-align: center;
+}
+
+h1, h2 {
+	color: magenta;
+	text-decoration: underline;
+	font-family: Arial;
+}
+
+body {
+	background-color: green;
+	background-image: url(/img/egg.png);
+}
+
+
+ul li {
+	list-style: square;
+
+}
+
+p, li {
+	font-family: arial;
+}
+
+table {
+	margin: 30px, 50px;
+	font: 25px;
+	font-family: sans-serif;
+}
+

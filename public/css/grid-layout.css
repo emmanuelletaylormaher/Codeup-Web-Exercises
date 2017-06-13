@@ -1,0 +1,39 @@
+html {
+	box-sizing: border-box;
+}
+
+
+.row{
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.column{
+	float: left;
+	text-align: center;
+	margin-bottom: 10px;
+	padding-top: 20px;
+	padding-bottom:20px;
+}
+
+.column.one-half {
+	width: 50%;
+}
+
+.column.one-third {
+	width: 33.33%;
+}
+
+.column.one-fourth{
+	width: 25%;
+}
+
+.column.one-eighth{
+	width: 12.5%;
+}
+
+@media screen and (max-width: 600px) {
+	.column.one-half, .column.one-third, .column.one-fourth, .column.one-eighth {
+		width: 100%;
+	}
+}
