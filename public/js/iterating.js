@@ -14,10 +14,14 @@
     // TODO: Create log statements that will print each 
     //of the names array elements individually.
 
-    console.log("The first name is " + names[0] + ".");
-    console.log("The second name is " + names[1] + ".");
-    console.log("The third name is " + names[2] + ".");
-    console.log("The fourth name is " + names[3] + ".");
+     for (var i = 0; i < names.length; i++) {
+   		console.log('The name at index ' + i + " is " + names[i] + ".")
+   	}
+
+
+   	names.forEach(function (element, index, array) {
+   		console.log("The name at index " + index + " is " + element + ".");
+   	});
 
 
     //BONUS exercise -- Mad Libs
