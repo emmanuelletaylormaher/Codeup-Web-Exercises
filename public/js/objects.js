@@ -1,4 +1,8 @@
 (function(){
+
+})();
+
+(function(){
     "use strict";
 
     /**
@@ -28,11 +32,11 @@
      * person.sayHello() // returns "Hello from Rick Sanchez!"
      */
 
-     person.sayHello = function () {
-        alert("Hello from " + person.firstName + " " + person.lastName + "!");
+    person.sayHello = function () {
+        return "Hello from " + person.firstName + " " + person.lastName + "!";
      };
 
-     person.sayHello();
+     console.log(person.sayHello());
 
     /** TODO: Remember this problem from before?
      *
@@ -48,11 +52,105 @@
      * and console.log the relevant messages for each person
      */
 
-    // var shoppers = [
-    //     {name: 'Cameron', amount: 180},
-    //     {name: 'Ryan', amount: 250},
-    //     {name: 'George', amount: 320}
-    // ];
+     
 
+     var shoppers = [
+         {name: 'Cameron', amount: 180},
+         {name: 'Ryan', amount: 250},
+         {name: 'George', amount: 320}
+     ];
+
+     
+        console.log(shoppers[1].name);
+
+        shoppers.forEach(function(shopper){
+           var finalTotal = 0;
+           var discountedAmount = 0 ;
+
+            if (shopper.amount > 200) {
+                discountedAmount = shopper.amount * .1;
+                finalTotal = shopper.amount - discountedAmount;
+                console.log(shopper.name + " got a discount on " + shopper.amount + " of " + discountedAmount);
+            } else {
+                console.log(shopper.name + " paid " + shopper.amount + " and did not have a discount.");
+                finalTotal = shopper.amount;
+            }
+
+            console.log(shopper.name + " had a final total of " + finalTotal);
+
+            console.log("=============================");
+        });
+
+
+    
+
+// todo:
+// Create an array of objects that represent books.
+// Each book should have a title and an author property.
+// The author property should be an object with a firstName and lastName.
+// Be creative and add at least 5 books to the array
+// var books = [todo];
+
+ var books = [
+    {
+        title: "Slaughterhouse Five",
+        author: {
+            firstName: "Kurt",
+            lastName: "Vonnetgut",
+        }
+    },
+    {
+        title: "Do Androids Dream of Electric Sheep?",
+        author: {
+            firstName: "Phillip K.",
+            lastName: "Dick",
+        }
+    },
+    {
+        title: "Kafka on the Shore",
+        author: {
+            firstName: "Haruki",
+            lastName: "Murakami",
+        }
+    },
+    {
+        title: "The Satanic Bible",
+        author: {
+            firstName: "Anton",
+            lastName: "Lavey",
+        }
+    },
+    {
+        title: "A Brief History of Time",
+        author: {
+            firstName: "Stephen",
+            lastName: "Hawking",
+        }
+    },
+    {
+        title: "The Color Purple",
+        author: {
+            firstName: "Alice",
+            lastName: "Walker",
+        }
+    }
+]; 
+
+
+// log out the books array
+//console.log(books);
+
+// todo:
+// Loop through the array of books using .forEach and print out the specified information about each one.
+// start loop here
+books.forEach(function(book, index){
+    console.log("Book #" + index);
+    console.log("Title: " + book.title);
+    console.log("Author: " + book.author.firstName + " " + book.author.lastName);
+    console.log("---");
+});
+// end loop here
+
+     
 
 })();
