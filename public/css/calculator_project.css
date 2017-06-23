@@ -1,0 +1,39 @@
+.btn {
+	margin: 1em;
+	color: white;
+	background-color: #332a3c;
+	height: 3em;
+	width: 3em;
+}
+
+.btn:hover {
+	opacity: 0.6;
+	color: white;
+}
+
+.btn:focus, input[type="button"]:focus {
+    outline: none;
+    color: white;
+}
+
+
+
+.operatorButton{
+	 background-color: #4d3f5a;
+}
+
+body {
+	background-image: url("/img/calculatorbackground.jpeg");
+	background-size: cover;
+	width: 100%;
+	height: auto;
+} 
+
+input {
+	margin-top: 1em;
+	background-color: #ffff99;
+}
+
+input#operator {
+	padding-left: 5px;
+}
