@@ -1,13 +1,13 @@
 //1. Write a function named isNegative that accepts a number and returns true or false based on whether the input is negative.
 
-// function isNegative(i) {
-// 	var i;	
-// 		if (i < 0) {
-// 			return true;
-// 		} else {
-// 			return false;
-// 		}
-// }
+function isNegative(i) {
+	var i;	
+		if (i < 0) {
+			return true;
+		} else {
+			return false;
+		}
+}
 
 //2. Write a function named average that accepts an array of numbers and returns the average of those numbers.
 
