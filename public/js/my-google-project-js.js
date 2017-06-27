@@ -10,6 +10,12 @@
 		}
 	};
 
+	//jSON objects of various favorite restaurants
+
+	// favRestaurants = {
+		
+	// }
+
 	var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
 	var yellowfish = {lat: 29.526755, lng: -98.566169};
@@ -38,5 +44,6 @@
 	marker.addListener('click', function(){
 		infowindow.open(map,marker);
 	});
+
 
 })();
