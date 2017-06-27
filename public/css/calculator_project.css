@@ -1,3 +1,20 @@
+@media screen and (max-width: 697px ) {
+	.row {
+		float: left;
+	}
+
+	.operatorButton {
+		width: 0.25em;
+		height: auto;
+	}
+}
+
+@media screen and (min-width: 698px ) {
+	.btn-sm {
+		display: none;
+	}
+}
+
 .btn {
 	margin: 1em;
 	color: white;
@@ -23,7 +40,7 @@
 }
 
 body {
-	background-image: url("/img/calculatorbackground.jpeg");
+	background-image: url("/img/calculatorbackgroundedit.png");
 	background-size: cover;
 	width: 100%;
 	height: auto;
