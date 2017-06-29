@@ -15,7 +15,6 @@
 </head>
 <body>
 	<h1>Frequently Asked Questions About National Parks</h1>
-	<h2>View Answers</h2>
 	<dl>
 		<dt>What makes these parks "National"?</dt>
 		<dd class="invisible">Every few years, our Reptilian Overlords (Praised Be Cold Bloods) gather together and determine which parks have the most delicious bugs to eat. All National Parks are considered Sacred Ground.</dd>
@@ -47,17 +46,62 @@
 		<dt>How can I contact you?</dt>
 		<dd class="invisible">Carrier pigeon.</dd>
 	</dl>
+	<button>View Answers</button>
+
+	<h1>Some Cool Facts About Some of Our Parks!</h1>
+	<h3>Big Bend</h3>
+		<ul>
+			<li>Date Established as Park: November 10, 1978</li>
+			<li>Located in: Texas</li>
+			<li>388,290 acres</li>
+			<li>Our Overlords (PBCB) greatly enjoy sunbathing here.</li>
+			</ul>
+	<h3>Death Valley</h3>
+			<ul>
+			<li>Date Established as Park: October 31, 1994</li>
+			<li>Located in: California, Nevada</li>
+			<li>1,296,283 acres</li>
+			<li>Not many bugs, but much sand (which we like).</li>
+			</ul>
+	<h3>Zion</h3>
+			<ul>
+			<li>Date Established as Park: November 19, 1919</li>
+			<li>Located in: Utah</li>
+			<li>4, 295, 127 acres</li>
+			<li>Oh, yes. Many, many bugs. Overlords (PCBC) like.</li>
+		</ul>
+
+	<button class="facts">The most important parts to know.</button>
+
+
 
 	<script src="/js/jquery.js"></script>
 	<script>
 		"use strict";
 
 		$(document).ready(function(){
-			$("h2").click(function(event){
+
+			$("button").click(function(event){
 				event.preventDefault();
 				$("dd").toggleClass("invisible");
 			});
+		
+			$("button.facts").click(function(event){
+				$('li:nth-child(4)').css("background-color", "yellow");
+			});
+
+			$("h3").click(function(event){
+				$("li").css("font-weight", "bold");
+			});
+
+			$("li").click(function(event){
+				$("ul").children(":first-child").css("color", "blue");
+			});
+
 		});
+
+
+
 	</script>
 
 </body>
