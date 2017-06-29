@@ -11,9 +11,15 @@
 			font-weight: bold;
 			color: darkblue;
 		}
+
+
 	</style>
 </head>
 <body>
+	<div>
+		<h1>Would you like to sign up for our newsletter?</h1>
+		<span>x</span>
+	</div>
 	<h1>Frequently Asked Questions About National Parks</h1>
 	<dl>
 		<dt>What makes these parks "National"?</dt>
@@ -87,7 +93,9 @@
 			});
 		
 			$("button.facts").click(function(event){
-				$('li:nth-child(4)').css("background-color", "yellow");
+				$('ul').each(function(index, element){
+					$(this).children().last().css("background-color", "yellow");
+				});
 			});
 
 			$("h3").click(function(event){
@@ -97,6 +105,12 @@
 			$("li").click(function(event){
 				$("ul").children(":first-child").css("color", "blue");
 			});
+
+			$("span").click(function(event){
+				$("div").toggle();
+			});
+
+			
 
 		});
 
