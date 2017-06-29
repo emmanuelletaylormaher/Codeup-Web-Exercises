@@ -2,9 +2,15 @@
 <html>
 <head>
     <title>Konami Code</title>
+    <style>
+    	img.success {
+    		display: none;
+    	}
+    </style>
 </head>
 <body>
     <h1>Konami Code</h1>
+    <img class="success" src="img/thescream.jpg">
 
     <script src="/js/jquery.js"></script>
     <script>
@@ -14,6 +20,7 @@
 
         $(document).keyup(function(event){
             console.log(event.keyCode);
+            alert("You have added 30 lives!!!!")
         });
     </script>
 </body>
