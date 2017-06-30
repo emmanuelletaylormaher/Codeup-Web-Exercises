@@ -39,25 +39,31 @@
         // TODO: "Move It" should move the box 100 pixels to the left
         $("#btn-move").click(function(event) {
             $("#animate-box").animate({
-                left:"+=30px"
+                right:"+=100px"
             }, 500);
         });
 
         // TODO: "Scale It" should expand the box width by 50%
         $("#btn-scale").click(function(event){
+            var currentWidth = parseInt($('#animate-box').css('width'));
+
             $("#animate-box").animate({
-                width: "+=50%"
+                width: (currentWidth * 1.5) + "px"
             }, 500);
         });
 
         // TODO: "Hide It" should use opacity to make the box invisible
         $("#btn-hide").click(function(event){
-            $("#animate-box").fadeOut(500, 0);
+            $("#animate-box").animate({
+                opacity: 0 
+            }, 500);
         });
 
         // TODO: "Show It" should make the box appear
         $("#btn-show").click(function(event){
-            $("#animate-box").fadeIn(500, 1);
+            $("#animate-box").animate({
+                opacity: 1 
+            }, 500);
         });
 
         // TODO: "Animate All" should use an animation stack to:
@@ -65,18 +71,24 @@
         //      2) Hide the box
         //      3) Reset the box back to its original position and opacity
         $("#btn-all").click(function(event){
+            var currentWidth = parseInt($('#animate-box').css('width'));
+
             $('#animate-box').animate({
-                left: "+=30px"
+                right: "+=100px"
             }, 500).animate({
-                width: "+=50%"
+                width: (currentWidth * 1.5) + "px"
             }, 500);
-            $("#animate-box").fadeOut(500, 0);
             $("#animate-box").animate({
-                left: "-=30px"
-            }, 500).animate({
-                width: "-=50%"
+                opacity: 0 
             }, 500);
-            $("#animate-box").fadeIn(500,1);
+            $("#animate-box").animate({
+                right: "-=100px"
+            }, 500).animate({
+                width: currentWidth
+            }, 500);
+            $("#animate-box").animate({
+                opacity: 1 
+            }, 500);
         });
     });
     </script>
