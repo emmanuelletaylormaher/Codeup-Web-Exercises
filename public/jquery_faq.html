@@ -19,6 +19,7 @@
 	<div>
 		<h1>Would you like to sign up for our newsletter?</h1>
 		<span>x</span>
+		<h2 id="register">Register for Our Page!</h2>
 	</div>
 	<h1>Frequently Asked Questions About National Parks</h1>
 	<dl>
@@ -107,10 +108,14 @@
 			});
 
 			$("span").click(function(event){
-				$("div").toggle();
+				$(this).parent().hide();
 			});
 
-			
+			$("h3").click(function(event){
+				$(this).next().slideToggle();
+			});			
+
+			// $("h2#register").hide().delay(8000).fadeIn();
 
 		});
 
