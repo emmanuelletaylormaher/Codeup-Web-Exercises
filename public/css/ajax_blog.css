@@ -1,0 +1,26 @@
+body {
+	background-color: #adebeb;
+}
+
+#elephant {
+	max-width: 50%;
+	max-height: 50%;
+}
+
+#posts {
+	background-color: #FFF;
+}
+
+#categories{
+	padding-right: 1em;
+	margin: 1em;
+	font-style: italic;
+}
+
+#content{
+	margin: 1em;
+}
+
+#postTitle {
+	padding-top: .5em;
+}
