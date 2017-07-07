@@ -6,26 +6,38 @@
 	<link rel="stylesheet" type="text/css" href="css/weather_map.css">
 </head>
 <body>
+	
+	<!--CUTESY STUFF-->
 	<div class="header container">
 		<img class="sun" id="left" src="img/sundogedit.gif">
 		<img class="sun" id="right" src="img/sundogedit.gif">
 		<h1>¿el clima?</h1>
-		<h3>(en san anto)</h3>
+		<!--<h3>(¿en? san anto)</h3>-->
+		<h3>¿en?</h3>
+
+		<form>
+			<input id="longitude" name="longitude" placeholder="long" type="text">
+			<input id="latitude" name="latitude" placeholder="lat" type="text">
+			<button>!!</button>
+		</form>
 	</div>
+
+	<!--WHICH DAY-->
 	<div class="container" id="titles">
 		<div class="row">
 			<div class="col-sm-4">
-				<h4>tomorrow</h4>
+				<h4 class="hidden-xs">tomorrow</h4>
 			</div>
 			<div class="col-sm-4">
-				<h4>after tomorrow</h4>
+				<h4 class="hidden-xs">after tomorrow</h4>
 			</div>
 			<div class="col-sm-4">
-				<h4>after that	</h4>
+				<h4 class="hidden-xs">after that	</h4>
 			</div>
 		</div>
 	</div>
 
+	<!--WEATHER GOES HERE-->
 	<div class="container">
 		<div class="row" id="theGoods">
 			
@@ -33,20 +45,35 @@
 	
 		</div>
 	</div>
-	<div class="container">
-		<img id="cloudy" src="img/cloudyedit.png">
 
+	<!--UPDATE ON WHAT CITY WE ARE IN-->
+	<div class="container" id="city">
+		
+	</div>
+
+	<!--the map-->
+	<div id="map"></div>
+
+	<!--CUTESY FOOTER-->
+	<div class="container">
+		<img class="cloudy" src="img/cloudyedit.png">
+		<h6 id="cloudy">emmanuelle taylor maher © 2017</h6>
 	</div>
 
 <!--jquery link-->
 <script type="text/javascript" src="js/jquery.js"></script>
+
+<!--google maps API-->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCr35UlAi11MzJ1vx8039S79-UJ5ifVkbQ"></script>
 
 <!--custom javascript-->
 <script>
 	//pulling the API GET request for San Antonio Weather
 	$.get("http://api.openweathermap.org/data/2.5/forecast/daily", {
 		APPID: "fc9caa5abb6e3d03dc633c94d2b4d08a",
-		q: "San Antonio, TX",
+		// q: "San Antonio, TX",
+		lat: 29,
+		lon: -100,
 		units: "imperial",
 		cnt: "3"
 	}).done(function(data, status){
@@ -54,9 +81,10 @@
 		satxWeather(data);
 	});
 
-	function satxWeather(data){
+	function satxWeather(data){	
 		var forecast = data.list[0];
 
+		//the forecast
 		data.list.forEach(function(forecast){
 			$("#theGoods").append(
 				"<div class='col-sm-4' id='deets'>" + "<p>" + forecast.temp.day + "°F | " + ((parseFloat(forecast.temp.day)-32) * (5/9)).toFixed(2) +"°C" +"</p>" +
@@ -68,6 +96,34 @@
 		});
 
 	};
+
+	//click the button, update the location
+	$("button").click(function(event){
+		event.preventDefault();
+		var latitude = $("#latitude").val()
+		var longitude = $("#longitude").val()
+		console.log(latitude);
+		console.log(longitude);
+			$.get("http://api.openweathermap.org/data/2.5/forecast/daily", {
+			APPID: "fc9caa5abb6e3d03dc633c94d2b4d08a",
+			// q: "San Antonio, TX",
+			lat: latitude,
+			lon: longitude,
+			units: "imperial",
+			cnt: "3"
+		}).done(function(data, status){
+			console.log(data);
+			$("#theGoods").html("");
+			satxWeather(data);
+		});
+
+	//pulling the google maps api
+	$.get("https://maps.googleapis.com/maps/api/js?key=AIzaSyCr35UlAi11MzJ1vx8039S79-UJ5ifVkbQ", {
+		
+	})
+
+
+	});
 
 </script>
 

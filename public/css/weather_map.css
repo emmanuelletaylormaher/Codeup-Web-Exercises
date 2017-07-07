@@ -28,9 +28,11 @@ p{
 .header{
 	text-align: center;
 	margin-bottom: 2em;
+	margin-top: 2em;
+	padding-bottom: 1em;
 }
 
-.header>h1, h3, h4 {
+.header>h1, h3, h4, h6#cloudy {
 	color: white;
 	text-shadow: 1px 1px black;
 }
@@ -52,11 +54,11 @@ img.sun#right{
 	float: right;
 }
 
-div.container#titles{
+div.container#titles, h6{
 	text-align: center;
 }
 
-img#cloudy{
+img.cloudy{
 	max-width: 30%;
 	max-height: auto;
 	display: block;
