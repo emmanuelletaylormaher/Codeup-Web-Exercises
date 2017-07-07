@@ -1,7 +1,69 @@
+/** hex color values: **/
+/** blue: #b3cce6 **/
+/** yellow: #e6e6b3 **/
+/** red: #e6b4b3 **/
+
 body {
-	background-color: #b3cce6;
+	background-color: #e6b4b3;
 }
 
-div#today {
+div.container{
+	background-color: #b3cce6;
+	padding-left: 2em;
+	padding-right: 2em;
+}
+
+div.col-sm-4#deets {
 	background-color: #e6e6b3;
+	border: solid 3px #e6b4b3;
+}
+
+p{
+	color: white;
+	text-shadow: 1px 1px black;
+	font-size: 2em;
+	text-align: center;
+}
+
+.header{
+	text-align: center;
+	margin-bottom: 2em;
+}
+
+.header>h1, h3, h4 {
+	color: white;
+	text-shadow: 1px 1px black;
+}
+
+.header>h1 {
+	font-size: 5em;
+}
+
+img.sun {
+	max-width: 20%;
+	max-height: auto;
+}
+
+img.sun#left{
+	float: left;
+}
+
+img.sun#right{
+	float: right;
+}
+
+div.container#titles{
+	text-align: center;
+}
+
+img#cloudy{
+	max-width: 30%;
+	max-height: auto;
+	display: block;
+	margin: 0 auto;
+}
+
+img.icon{
+	display: block;
+	margin: 0 auto;
 }

@@ -6,14 +6,36 @@
 	<link rel="stylesheet" type="text/css" href="css/weather_map.css">
 </head>
 <body>
-	<h1>what in the HECK is the weather?</h1>
-	<h3>San Antonio</h3>
-	<div class="container">
+	<div class="header container">
+		<img class="sun" id="left" src="img/sundogedit.gif">
+		<img class="sun" id="right" src="img/sundogedit.gif">
+		<h1>¿el clima?</h1>
+		<h3>(en san anto)</h3>
+	</div>
+	<div class="container" id="titles">
 		<div class="row">
-			<div id="today">
-				<p>egg</p>
+			<div class="col-sm-4">
+				<h4>tomorrow</h4>
+			</div>
+			<div class="col-sm-4">
+				<h4>after tomorrow</h4>
+			</div>
+			<div class="col-sm-4">
+				<h4>after that	</h4>
 			</div>
 		</div>
+	</div>
+
+	<div class="container">
+		<div class="row" id="theGoods">
+			
+			
+	
+		</div>
+	</div>
+	<div class="container">
+		<img id="cloudy" src="img/cloudyedit.png">
+
 	</div>
 
 <!--jquery link-->
@@ -25,20 +47,26 @@
 	$.get("http://api.openweathermap.org/data/2.5/forecast/daily", {
 		APPID: "fc9caa5abb6e3d03dc633c94d2b4d08a",
 		q: "San Antonio, TX",
-		units: "imperial"
+		units: "imperial",
+		cnt: "3"
 	}).done(function(data, status){
 		console.log(data);
+		satxWeather(data);
 	});
 
 	function satxWeather(data){
-		var forecast = data[0];
+		var forecast = data.list[0];
 
-		data.forEach(function(forecast){
-			$("#today").append(
-				forecast.humidity +
-				forecast.pressure
+		data.list.forEach(function(forecast){
+			$("#theGoods").append(
+				"<div class='col-sm-4' id='deets'>" + "<p>" + forecast.temp.day + "°F | " + ((parseFloat(forecast.temp.day)-32) * (5/9)).toFixed(2) +"°C" +"</p>" +
+				"<img class='icon' src=http://openweathermap.org/img/w/"+ forecast.weather[0].icon +".png>" +
+				"<h6> humidity: " + forecast.humidity + "</h6>" +
+				"<h6> wind: " + forecast.speed + "</h6>" +
+				"<h6> pressure: " + forecast.pressure + "</h6>" + "</div>"
 			);
 		});
+
 	};
 
 </script>
