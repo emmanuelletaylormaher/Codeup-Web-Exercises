@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>weather map weather app</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/weather_map.css">
+</head>
+<body>
+	<h1>what in the HECK is the weather?</h1>
+	<h3>San Antonio</h3>
+	<div class="container">
+		<div class="row">
+			<div id="today">
+				<p>egg</p>
+			</div>
+		</div>
+	</div>
+
+<!--jquery link-->
+<script type="text/javascript" src="js/jquery.js"></script>
+
+<!--custom javascript-->
+<script>
+	//pulling the API GET request for San Antonio Weather
+	$.get("http://api.openweathermap.org/data/2.5/forecast/daily", {
+		APPID: "fc9caa5abb6e3d03dc633c94d2b4d08a",
+		q: "San Antonio, TX",
+		units: "imperial"
+	}).done(function(data, status){
+		console.log(data);
+	});
+
+	function satxWeather(data){
+		var forecast = data[0];
+
+		data.forEach(function(forecast){
+			$("#today").append(
+				forecast.humidity +
+				forecast.pressure
+			);
+		});
+	};
+
+</script>
+
+</body>
+</html>
