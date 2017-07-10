@@ -107,7 +107,7 @@
 		getTheWeather(mapLat, mapLong);
 	});
 
-	//plugging those coordinates into the weather 
+	//plugging those coordinates into the weather API
 
 	marker.addListener('click', toggleBounce);
 	marker.setMap(map);
