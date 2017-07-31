@@ -1,30 +1,40 @@
 <?php
 
-$adjectives = [
-	"angry",
-	"nerdy",
-	"sleepy",
-	"coy",
-	"inattentive",
-	"anxious",
-	"transient",
-	"interstellar",
-	"violent",
-	"interrogative"
-];
+function pageController(){
+	$adjectives = [
+		"angry",
+		"nerdy",
+		"sleepy",
+		"coy",
+		"inattentive",
+		"anxious",
+		"transient",
+		"interstellar",
+		"violent",
+		"interrogative"
+	];
 
-$nouns = [
-	"egg",
-	"scenery",
-	"accordion",
-	"javelin",
-	"rabbit",
-	"serpent",
-	"moon",
-	"particle",
-	"android",
-	"pitch"
-];
+	$nouns = [
+		"egg",
+		"scenery",
+		"accordion",
+		"javelin",
+		"rabbit",
+		"serpent",
+		"moon",
+		"particle",
+		"android",
+		"pitch"
+	];
+
+	$data = [];
+	$data["adjectives"] = $adjectives;
+	$data["nouns"] = $nouns;
+	return $data;
+}
+
+extract(pageController());
+
 
 function returnRandom($array){
 	$random = array_rand($array);

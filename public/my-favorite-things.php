@@ -1,12 +1,20 @@
 <?php
 
-$favoriteThings = [
-	"bicycles",
-	"steamed rice",
-	"eggs",
-	"pointy shoes",
-	"touristy tshirts"
-	];
+function pageController(){
+	$favoriteThings = [
+		"bicycles",
+		"steamed rice",
+		"eggs",
+		"pointy shoes",
+		"touristy tshirts"
+		];
+
+	$data = [];	
+	$data["favoriteThings"] = $favoriteThings;
+	return $data;
+}
+
+extract(pageController());
 
 ?>
 
