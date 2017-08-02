@@ -1,5 +1,7 @@
 <?php
-var_dump($_POST);
+session_start();
+var_dump($_SESSION);
+$sessionID = session_id();
 
 function pageController(){
 	$data = [];
@@ -8,9 +10,16 @@ function pageController(){
 	$username = isset($_POST["username"]) ? $_POST["username"] : "";
 	$password = isset($_POST["password"]) ? $_POST["password"] : "";
 	$message = "";
+	$logged_in_user = isset($_SESSION["logged_in_user"]) ? $_SESSION["logged_in_user"]: "";
+
+	if (isset($_SESSION["logged_in_user"])) {
+		header("Location: authorized.php");
+		die();
+	}
 
 	if (!empty($_POST)) {
 		if ($username === "guest" && $password === "password") {
+			$_SESSION["logged_in_user"] = $username;
 			header("Location: authorized.php");
 			die();
 		} else {
@@ -40,6 +49,8 @@ extract(pageController());
 	<title>WELCOME TO FACEBOOKS</title>
 </head>
 <body>
+	<p> session id: <?= $sessionID; ?></p>
+
 	<h1>HELLO, POWERFUL AMERICAN MAN</h1>
 	<h2>HERE TO LOG INTO YOUR FACEBOOKS?</h2>
 	<h3>DO GIVE PASSWORD AND NAME OF USERS HERE</h3>
