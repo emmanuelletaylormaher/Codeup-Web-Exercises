@@ -32,7 +32,7 @@ extract(pageController());
 <body>
 	<p> session id: <?= $sessionID; ?></p>
 
-	<h1>AUTHORIZED! welcoming to you, <?= $username ?>.</h1>
+	<h1>AUTHORIZED! welcoming to you, <?= escape($username) ?>.</h1>
 	<h2>GLORY TO THE MOTHERLAND !</h2>
 	<img src="img/old_internet.gif">
 	<br><br>
