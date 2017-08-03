@@ -1,80 +1,68 @@
 <?php
-
-
-$allMovies = [
-    [
-        'title' => 'The Godfather',
-        'release' => 1972,
-        'rating' => '9.2',
-        'genre' => ['crime', 'drama']
-    ],
-    [
-        'title' => 'The Godfather: Part II',
-        'release' => 1974,
-        'rating' => '9.0',
-        'genre' => ['crime', 'drama']
-    ],
-    [
-        'title' => 'The Dark Knight',
-        'release' => 2008,
-        'rating' => '9.0',
-        'genre' => ['action', 'crime', 'drama']
-
-    ],
-    [
-        'title' => 'The Good, The Bad, and The Ugly',
-        'release' => '1966',
-        'rating' => '8.9',
-        'genre' => ['western']
-    ],
-    [
-        'title' => 'Forest Gump',
-        'release' => 1994,
-        'rating' => '8.7',
-        'genre' => ['comedy', 'drama', 'romance']
-    ],
-    [
-        'title' => 'Seven Samurai',
-        'release' => 1954,
-        'rating' => '8.6',
-        'genre' => ['adventure', 'drama']
-    ],
-    [
-        'title' => 'Back to the Future',
-        'release' => 1985,
-        'rating' => '8.5',
-        'genre' => ['adventure', 'comedy', 'sci-fi']
-    ],
-    [
-        'title' => 'The Lion King',
-        'release' => 1994,
-        'rating' => '8.5',
-        'genre' => ['animation', 'adventure', 'drama']
-    ],
-    [
-        'title' => 'Alien',
-        'release' => 1979,
-        'rating' => '8.5',
-        'genre' => ['horror', 'sci-fi']
-    ],
-    [
-        'title' => '2001: A Space Odyssey',
-        'release' => 1968,
-        'rating' => '8.3',
-        'genre' => ['adventure', 'sci-fi']
-    ]
-];
+require "allMovies.php";
+require_once "functions.php";
 
 function pageController($allMovies)
 {
     $data = [];
     var_dump($_GET);
 
+    $genre = inputGet("genre");
+    $title = inputGet("title");
+    $release= inputGet("release");
+
+    function getMoviesByGenre($genre, $allMovies){
+        $movies = [];
+
+        foreach ($allMovies as $key => $movie) {
+            if(in_array($genre, $movie["genre"])){
+                $movies[] = $movie;
+            }
+        }
+        return $movies;
+    }
+
+    function getMoviesByTitle($title, $allMovies){
+        $movies = [];
+
+        foreach ($allMovies as $movie) {
+                if (stripos($movie["title"], $title) !== false) {
+                    $movies[] = $movie;
+                }
+        } 
+        return $movies;
+    }
+
+    if(empty($_GET)) {
+        $data["movies"] = $allMovies;
+    } elseif (!empty($genre) && empty($title)) {
+        $data["movies"] = $getMoviesByGenre($genre, $allMovies);
+
+    } elseif (!empty($title) && empty($genre)) {
+        $data["movies"] = $getMoviesByTitle($title, $allMovies);
+
+        $data["movies"] = $movies;   
+    } else if (!empty($title) && !empty($genre)){
+        $moviesWithGenre = getMoviesByGenre($genre, $allMovies);
+        $moviesWithGenreAndTitle = getMoviesByTitle($title, $moviesWithGenre);
+        $data["movies"] = $moviesWithGenreAndTitle;
+    } else {
+        $data["movies"] = $allMovies;
+    }
+
+    if(!empty($release)){
+        $movies = [];
+
+        foreach ($allMovies as $movie) {
+            if($movie["release"] > $release){
+                $movies[] = $movie;
+            }
+        }
+    }
+
+
     ####searching by genre####
     if(isset($_GET['genre'])) {
-        // make a new array called $movies
-        // iterate through the allMovies array
-        // if any movie has the genre of sci-fi, push that array onto $movies;
 
         $genre = $_GET['genre'];
         $movies = [];
@@ -100,15 +88,15 @@ function pageController($allMovies)
 
         $data['movies'] = $movies;
 
-    } elseif (isset($_GET["release"])) {
-        $release = $_GET["release"];
-        $movies = [];
+    // } elseif (isset($_GET["release"])) {
+    //     $release = $_GET["release"];
+    //     $movies = [];
 
-        foreach ($allMovies as $movie) {
-            if ($release >= 2000) {
-                $movies = $movie;
-            }
-        }
+    //     foreach ($allMovies as $movie) {
+    //         if ($release >= 2000) {
+    //             $movies = $movie;
+    //         }
+    //     }
 
         $data["movies"] = $movies;
     } else {
@@ -152,11 +140,11 @@ extract(pageController($allMovies));
         <h1>Welcome to MovieLister!</h1>
 
         <section class="form">
-            <form>
+            <form method="GET" action="movies.php">
                 <input type="text" name="title" placeholder="Search movies by title...">
-                <input type="submit" name="submit">
+               <!--  <input type="submit" name="submit">
             </form>
-            <form>
+            <form> -->
                 <input type="text" name="genre" placeholder="Search movies by Genre...">
                 <input type="submit">
             </form>
@@ -166,7 +154,7 @@ extract(pageController($allMovies));
             <a href="?">Show all movies</a>
 
             <!-- Add a link that will show only movies with a release date after 2000 -->
-            <a href="movies.php?release">All movies released after 2000</a>
+            <a href="movies.php?release=2000">All movies released after 2000</a>
 
             <a href="movies.php?genre=comedy">Show only comedies</a>
 
