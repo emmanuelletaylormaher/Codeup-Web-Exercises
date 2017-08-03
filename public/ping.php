@@ -1,12 +1,15 @@
 <?php
+require "functions.php";
 
 function pageController(){
-	$data=[];
-	$count = (isset($_GET["count"])) ? $_GET["count"] : 0;
-	$data["count"] = $count;
-	$action = (isset($_GET["action"])) ? $_GET["action"] : "none";
-	$data["action"] = $action;
+	$count = inputGet("count", $default = 0);
+	$action = inputGet("action", $default = "");
 	$turnString = "You're up! Hits: {$count}";
+	
+	$data = array(
+		"count" => $count,
+		"action" => $action
+	);
 
 	if ($action == "MISS") {
 		$count = 0;

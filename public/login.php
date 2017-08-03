@@ -1,16 +1,13 @@
 <?php
+require "functions.php";
 session_start();
 var_dump($_SESSION);
 $sessionID = session_id();
 
 function pageController(){
-	$data = [];
-
-
-	$username = isset($_POST["username"]) ? $_POST["username"] : "";
-	$password = isset($_POST["password"]) ? $_POST["password"] : "";
+	$username = inputGet("username", $default = "");
+	$password = inputGet("password", $default = "");
 	$message = "";
-	$logged_in_user = isset($_SESSION["logged_in_user"]) ? $_SESSION["logged_in_user"]: "";
 
 	if (isset($_SESSION["logged_in_user"])) {
 		header("Location: authorized.php");

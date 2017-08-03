@@ -100,29 +100,39 @@ function pageController($allMovies)
 
         $data['movies'] = $movies;
 
+    } elseif (isset($_GET["release"])) {
+        $release = $_GET["release"];
+        $movies = [];
 
+        foreach ($allMovies as $movie) {
+            if ($release >= 2000) {
+                $movies = $movie;
+            }
+        }
+
+        $data["movies"] = $movies;
     } else {
         // set $data['movies'] to hold all movies (unless another request is made.)
         $data['movies'] = $allMovies;
     }
 
     #####searching by release#####
-    if(isset($_GET["release"])){
+    // if(isset($_GET["release"])){
 
-        $release = $_GET["release"];
-        $movies = [];
+    //     $release = $_GET["release"];
+    //     $movies = [];
 
-        foreach ($allMovies as $movie) {
-            if($release >= 2000) {
+    //     foreach ($allMovies as $movie) {
+    //         if($release >= 2000) {
 
-                $movies = $movie;
-            }
-        }
+    //             $movies = $movie;
+    //         }
+    //     }
 
-        $data["movies"] = $movie;
-    } else {
-        $data["movies"] = $allMovies;
-    }
+    //     $data["movies"] = $movie;
+    // } else {
+    //     $data["movies"] = $allMovies;
+    // }
 
     return $data;
 }
