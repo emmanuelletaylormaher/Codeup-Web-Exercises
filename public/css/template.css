@@ -1,0 +1,9 @@
+#skyline{
+	background-image: url("/img/skyline.jpg");
+}
+
+.footer, .header{
+	background-color: #568C69;
+	color: white;
+	text-align: center;
+}
