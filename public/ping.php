@@ -1,5 +1,4 @@
 <?php
-require "functions.php";
 require_once "../Input.php";
 
 function pageController(){
