@@ -1,9 +1,10 @@
 <?php
 require "functions.php";
+require_once "../Input.php";
 
 function pageController(){
-	$count = inputGet("count", $default = 0);
-	$action = inputGet("action", $default = "");
+	$count=Input::get("count");
+	$action= Input::get("action");
 	$turnString = "You're up! Hits: {$count}";
 	
 	$data = array(
