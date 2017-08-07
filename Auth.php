@@ -1,5 +1,7 @@
 <?php
 
+require_once "Log.php";
+
 /**
  * A utility class for handling common authorization tasks
  */
@@ -25,22 +27,18 @@ class Auth
      */
     public static function attempt($username, $password)
     {
-        // TODO: check if the passed username matches the static username
-        //       property
+        $log = new Log();
+
         if($username == self::$username){
             if (password_verify($password, self::$password)) {
-                echo "login attempt successful!".PHP_EOL;
-                $__SESSION["LOGGED_IN_USER"] = $password;
+                $log->info("login attempt successful!");
+                $__SESSION["LOGGED_IN_USER"] = $username;
+                return true;
             } else {
-            echo "login attempt not successful.".PHP_EOL;
+                $log->info("login attempt not successful.");
+             return false;
             }
         }
-        // TODO: use the `password_verify` function to check if the passed
-        //       password matches the static password property
-        // TODO: create an instance of the Log class to log a message of whether
-        //       or not the login attempt was successful or not
-        // TODO: if the username and password match, set the 'LOGGED_IN_USER'
-        //       key in the session to the passed username
     }
 
     /**
@@ -62,7 +60,7 @@ class Auth
     {
         // TODO: return the value associated with the 'LOGGED_IN_USER' key in
         //       the session, or null if it is not set
-        if (self::check()) {
+        if (isset($_SESSION["LOGGED_IN_USER"])) {
             return $__SESSION["LOGGED_IN_USER"];
         } else {
             return null;
@@ -78,7 +76,5 @@ class Auth
         session_destroy();
         session_regenerate_id();
         session_start();
-        header("Location: login.php");
-        die();
     }
 }

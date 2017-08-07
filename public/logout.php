@@ -1,23 +1,13 @@
 <?php
 require_once "functions.php";
 require_once "../Input.php";
+require_once "../Auth.php";
 
 session_start();
 
-function clearSession(){
-	session_unset();
-	session_destroy();
-	session_regenerate_id();
-	session_start();
-}
-
-function endMe(){
-	clearSession();
-	header("Location: login.php");
-	die();
-}
-
-endMe();
+Auth::logout();
+header("Location: login.php");
+die();
 
 ?>
 

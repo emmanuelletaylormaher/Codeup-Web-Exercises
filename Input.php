@@ -31,6 +31,17 @@ class Input
         }
     }
 
+    public static function getNumeric($key, $default = 0)
+    {
+        $value = self::get($key, $default);
+
+        if(!is_numeric($value)) {
+            return "Value must be numeric!";
+        }
+
+        return $value;
+    }
+
     ///////////////////////////////////////////////////////////////////////////
     //                      DO NOT EDIT ANYTHING BELOW!!                     //
     // The Input class should not ever be instantiated, so we prevent the    //

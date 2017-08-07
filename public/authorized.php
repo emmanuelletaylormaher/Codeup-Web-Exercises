@@ -1,6 +1,7 @@
 <?php
 require_once "functions.php";
 require_once "../Input.php";
+require_once "../Auth.php";
 
 
 var_dump($_POST);
@@ -12,9 +13,9 @@ $sessionID = session_id();
 function pageController(){
 	$data = [];
 	$username = isset($_SESSION["logged_in_user"]) ? $_SESSION["logged_in_user"]: "";
-	$data["username"] = $username;
+	$data["username"] = Auth::user();
 	
-	if(!isset($_SESSION["logged_in_user"])){
+	if(!Auth::check()){
 		header:("Location: login.php");
 		die();
 	}
