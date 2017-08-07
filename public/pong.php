@@ -1,5 +1,6 @@
 <?php
 require_once "../Input.php";
+require_once "functions.php";
 
 function pageController(){
 	$count=Input::get("count");
@@ -37,7 +38,7 @@ extract(pageController());
 	<br>
 	<form method="GET" action="ping.php" >
 		<input type="hidden" name="action" value="HIT">
-		<input type="hidden" name="count" value=<?= $count+1 ?>>
+		<input type="hidden" name="count" value=<?= escape($count) +1 ?>>
 		<button type="submit">HIT</button>
 	</form>
 		<br>

@@ -1,5 +1,7 @@
 <?php
-require "functions.php";
+require_once "functions.php";
+require_once "../Input.php";
+
 session_start();
 var_dump($_SESSION);
 $sessionID = session_id();
