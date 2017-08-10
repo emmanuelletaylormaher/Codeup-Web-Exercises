@@ -68,3 +68,4 @@ VALUES
 ("Zion","Utah","1919-11-19",146597.60);';
 
 $dbc->exec($parkStats);
+echo "values added".PHP_EOL;
