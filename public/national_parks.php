@@ -4,7 +4,6 @@ require_once __DIR__ . "/../db_connect.php";
 require_once "../Input.php";
 
 
-
 function pageController($dbc){
 	$message = "";
 	$page=Input::getNumeric("page", 1);
