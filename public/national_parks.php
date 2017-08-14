@@ -2,6 +2,9 @@
 
 require_once __DIR__ . "/../db_connect.php";
 require_once "../Input.php";
+require_once "../park_logins.php";
+
+
 
 
 function pageController($dbc){
