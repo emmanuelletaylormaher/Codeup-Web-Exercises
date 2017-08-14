@@ -1,0 +1,12 @@
+body {
+	background-color: #76C391;
+}
+
+#parkimage {
+	max-width: 100%;
+	max-height: auto;
+}
+
+.pagination {
+	display: inline-block;
+}
