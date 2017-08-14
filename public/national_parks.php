@@ -5,6 +5,24 @@ require_once "../Input.php";
 require_once "../park_logins.php";
 
 
+function newPark($dbc){
+	$name = Input::get("newname");
+	$location = Input::get("newlocation");
+	$dateEstablished = Input::get("newdate_established");
+	$areaInAcres = Input::get("newarea_in_acres");
+	$description = Input::get("newdescription");
+
+	$query = "INSERT INTO national_parks (name, location, date_established, area_in_acres, description) VALUES (:name, :location, :dateEstablished, :areaInAcres, :description)";
+	$newParkStmt= $dbc->prepare($query);
+
+	$newParkStmt->bindValue(":name", $name, PDO::PARAM_STR);
+	$newParkStmt->bindValue(":location", $location, PDO::PARAM_STR);
+	$newParkStmt->bindValue(":dateEstablished", $dateEstablished, PDO::PARAM_STR);
+	$newParkStmt->bindValue(":areaInAcres", $areaInAcres, PDO::PARAM_STR);
+	$newParkStmt->bindValue(":description", $description, PDO::PARAM_STR);
+		
+	$newParkStmt->execute();
+}
 
 
 function pageController($dbc){
@@ -26,35 +44,13 @@ function pageController($dbc){
 	);
 
 	if (!empty($_POST)) {
-		$name = Input::get("newname");
-		$location = Input::get("newlocation");
-		$dateEstablished = strtotime(Input::get("newdate_established"));
-		$areaInAcres = Input::get("newarea_in_acres");
-		$description = Input::get("newdescription");
-
-		$query = "INSERT INTO national_parks (name, location, date_established, area_in_acres, description) VALUES (:name, :location, :dateEstablished, :areaInAcres, :description)";
-		$newParkStmt= $dbc->prepare($query);
-
-		$newParkStmt->bindValue(":name", $name, PDO::PARAM_STR);
-		$newParkStmt->bindValue(":location", $location, PDO::PARAM_STR);
-		$newParkStmt->bindValue(":dateEstablished", $dateEstablished, PDO::PARAM_STR);
-		$newParkStmt->bindValue(":areaInAcres", $areaInAcres, PDO::PARAM_STR);
-		$newParkStmt->bindValue(":description", $description, PDO::PARAM_STR);
-		
-		$newParkStmt->execute();
-
-		if (empty($name)|| empty($location) || empty($location) || empty($dateEstablished) || empty($areaInAcres) || empty($description)) {
-			$message = "please enter valid information into the form!";
-		}
+		newPark($dbc);
 
 	}
 
-
 	return $data;
-
 }
 
-// offset = (n-1)*4
 
 extract(pageController($dbc));
 
@@ -79,7 +75,7 @@ extract(pageController($dbc));
 		</div> -->
 			<section class= "container col-md-12">
 					<?php foreach ($parks as $park): ?>
-						<div class="col-md-3">
+						<div class="col-md-3 panel panel-default">
 			                <h4><?= $park['name'] ?></h4>
 			                <p>Location: <?= $park['location'] ?></p>
 			                <p>Date Established: <?= $park['date_established'] ?></p>
@@ -97,7 +93,7 @@ extract(pageController($dbc));
 			<section>
 				<h3>add your own park!</h3>
 				<h4 style="color:red; "><?= $message ?></h4>
-				<form method="POST" action="national_parks.php">
+				<form method="POST" action="national_parks.php" class="form-group">
 					<label>Name:</label>
 					<input type="text" name="newname">
 					<label>Location:</label>
