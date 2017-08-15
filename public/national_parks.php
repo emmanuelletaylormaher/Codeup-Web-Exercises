@@ -5,7 +5,8 @@ require_once "../Input.php";
 require_once "../park_logins.php";
 
 
-function newPark($dbc){
+function newPark($dbc)
+{
 	$name = Input::get("newname");
 	$location = Input::get("newlocation");
 	$dateEstablished = Input::get("newdate_established");
@@ -24,8 +25,13 @@ function newPark($dbc){
 	$newParkStmt->execute();
 }
 
+function retrieveParks($dbc)
+{
 
-function pageController($dbc){
+}
+
+function pageController($dbc)
+{
 	$message = "";
 	$page=Input::getNumeric("page", 1);
 	$offset = (($page - 1)*4);
@@ -45,7 +51,6 @@ function pageController($dbc){
 
 	if (!empty($_POST)) {
 		newPark($dbc);
-
 	}
 
 	return $data;
@@ -70,9 +75,6 @@ extract(pageController($dbc));
 <body>
 	<main class="container">
 		<h1> check out some national parks!! </h1>
-		<!-- <div>
-			<img id="parkimage" class="img-fluid" src="img/nationalpark.png" alt="national park image">
-		</div> -->
 			<section class= "container col-md-12">
 					<?php foreach ($parks as $park): ?>
 						<div class="col-md-3 panel panel-default">
