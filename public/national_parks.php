@@ -25,20 +25,41 @@ function newPark($dbc)
 	$newParkStmt->execute();
 }
 
-function retrieveParks($dbc)
+function countParks($dbc) 
 {
+	$countQuery = "SELECT COUNT(*) FROM national_parks";
+	$stmt = $dbc->query($countQuery);
+	$count = (int) $stmt->fetchColumn();
+
+	return $count; 
+}
+
+function retrieveParks($dbc, $limit = 2, $offset = 0)
+{
+	$query = "SELECT *  FROM national_parks LIMIT :limit OFFSET :offset";
+	$stmt = $dbc->prepare($query);
+
+	$stmt->bindValue(":limit", (int) $limit, PDO::PARAM_INT);
+	$stmt->bindValue(":offset", (int) $offset, PDO::PARAM_INT);
+
+	$stmt->execute();
+
+	$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+	return $rows;
 
 }
 
 function pageController($dbc)
 {
 	$message = "";
-	$page=Input::getNumeric("page", 1);
+	$page=Input::escape(Input::get("page", 1));
+	$recordsPerPage = Input::escape(Input::get("recordsPerPage", 4));
 	$offset = (($page - 1)*4);
 	$query = "SELECT *  FROM national_parks LIMIT 4 OFFSET " . $offset;
 	$stmt = $dbc->query($query);
 
-	$parks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$parks = retrieveParks($dbc, $recordsPerPage, (($page - 1) * $recordsPerPage));
 	$navigate=Input::get("navigate");
 
 
@@ -75,6 +96,13 @@ extract(pageController($dbc));
 <body>
 	<main class="container">
 		<h1> check out some national parks!! </h1>
+		    <div class="row text-center">
+            
+            <a class="col-lg-4" href="?page=<?=$page?>&recordsPerPage=4">4 Per Page</a>
+            <a class="col-lg-4" href="?page=1&recordsPerPage=10">10 Per Page</a>
+            <a class="col-lg-4" href="?page=1&recordsPerPage=100">100 Per Page</a>
+            
+        </div>
 			<section class= "container col-md-12">
 					<?php foreach ($parks as $park): ?>
 						<div class="col-md-3 panel panel-default">
