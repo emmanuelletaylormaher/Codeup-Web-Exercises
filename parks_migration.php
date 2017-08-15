@@ -4,6 +4,7 @@
 require_once "park_logins.php";
 // Require db_connect.php
 require_once "db_connect.php";
+require_once "Park.php";
 
 $dbc->exec("DROP TABLE IF EXISTS national_parks");
 
