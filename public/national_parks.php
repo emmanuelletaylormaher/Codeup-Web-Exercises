@@ -3,36 +3,27 @@
 require_once __DIR__ . "/../db_connect.php";
 require_once "../Input.php";
 require_once "../park_logins.php";
+require_once "../Park.php";
 
 
 function newPark($dbc)
 {
-	$name = Input::get("newname");
-	$location = Input::get("newlocation");
-	$dateEstablished = Input::get("newdate_established");
-	$areaInAcres = Input::get("newarea_in_acres");
-	$description = Input::get("newdescription");
+	$name = Input::escape(Input::get("newname"));
+	$location = Input::escape(Input::get("newlocation"));
+	$dateEstablished = Input::escape(Input::get("newdate_established"));
+	$areaInAcres = Input::escape(Input::get("newarea_in_acres"));
+	$description = Input::escape(Input::get("newdescription"));
 
-	$query = "INSERT INTO national_parks (name, location, date_established, area_in_acres, description) VALUES (:name, :location, :dateEstablished, :areaInAcres, :description)";
-	$newParkStmt= $dbc->prepare($query);
+	$newPark = new Park();
+	$newPark->name = $name;
+	$newPark->location = $location;
+	$newPark->dateEstablished = $dateEstablished;
+	$newPark->areaInAcres = $areaInAcres;
+	$newPark->description = $description;
+	$newPark->insert();
 
-	$newParkStmt->bindValue(":name", $name, PDO::PARAM_STR);
-	$newParkStmt->bindValue(":location", $location, PDO::PARAM_STR);
-	$newParkStmt->bindValue(":dateEstablished", $dateEstablished, PDO::PARAM_STR);
-	$newParkStmt->bindValue(":areaInAcres", $areaInAcres, PDO::PARAM_STR);
-	$newParkStmt->bindValue(":description", $description, PDO::PARAM_STR);
-		
-	$newParkStmt->execute();
 }
 
-function countParks($dbc) 
-{
-	$countQuery = "SELECT COUNT(*) FROM national_parks";
-	$stmt = $dbc->query($countQuery);
-	$count = (int) $stmt->fetchColumn();
-
-	return $count; 
-}
 
 function retrieveParks($dbc, $limit = 2, $offset = 0)
 {
@@ -59,16 +50,16 @@ function pageController($dbc)
 	$query = "SELECT *  FROM national_parks LIMIT 4 OFFSET " . $offset;
 	$stmt = $dbc->query($query);
 
-	$parks = retrieveParks($dbc, $recordsPerPage, (($page - 1) * $recordsPerPage));
-	$navigate=Input::get("navigate");
+	$parks = Park::paginate($page, $recordsPerPage);
+	$navigate=Input::escape(Input::get("navigate"));
 
 
-	$data = array(
-			"navigate" => $navigate,
-			"parks" => $parks,
-			"page" => $page,
-			"message" => $message
-	);
+	$data["page"] = $page;
+    $data["parks"] = $parks;
+    $data["recordsPerPage"] = $recordsPerPage;
+    $data['parksCount'] = Park::count();
+    $data["message"] = $message;
+
 
 	if (!empty($_POST)) {
 		newPark($dbc);
@@ -96,16 +87,16 @@ extract(pageController($dbc));
 <body>
 	<main class="container">
 		<h1> check out some national parks!! </h1>
-		    <div class="row text-center">
+		<div class="row text-center">
             
-            <a class="col-lg-4" href="?page=<?=$page?>&recordsPerPage=4">4 Per Page</a>
-            <a class="col-lg-4" href="?page=1&recordsPerPage=10">10 Per Page</a>
-            <a class="col-lg-4" href="?page=1&recordsPerPage=100">100 Per Page</a>
+            <a class="col-lg-4 btn btn-secondary" href="?page=<?=$page?>&recordsPerPage=4">4 Per Page</a>
+            <a class="col-lg-4 btn btn-secondary" href="?page=1&recordsPerPage=10">10 Per Page</a>
+            <a class="col-lg-4 btn btn-secondary" href="?page=1&recordsPerPage=12">12 Per Page</a>
             
         </div>
-			<section class= "container col-md-12">
+		<section class="row text-center">
 					<?php foreach ($parks as $park): ?>
-						<div class="col-md-3 panel panel-default">
+						<div class="col-md-12 panel panel-default">
 			                <h4><?= $park['name'] ?></h4>
 			                <p>Location: <?= $park['location'] ?></p>
 			                <p>Date Established: <?= $park['date_established'] ?></p>
@@ -120,10 +111,10 @@ extract(pageController($dbc));
 					<button class="btn" <?php if ($page == 15) {?> style="display:none;" <?php }else {?> style="display:initial;" <?php } ?> name="page" value=<?= $page + 1 ?> >next</button>
 				</form>
 			</section>
-			<section>
-				<h3>add your own park!</h3>
-				<h4 style="color:red; "><?= $message ?></h4>
-				<form method="POST" action="national_parks.php" class="form-group">
+			<h3>add your own park!</h3>
+			<h4 style="color:red; "><?= $message ?></h4>
+			<section class= "container col-sm-12">
+				<form method="POST" action="national_parks.php">
 					<label>Name:</label>
 					<input type="text" name="newname">
 					<label>Location:</label>

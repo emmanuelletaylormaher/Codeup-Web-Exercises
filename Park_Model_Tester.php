@@ -12,22 +12,22 @@ require_once "Park.php";
 
 // test Park::count()
 	
-	// echo "There are " . Park::count() . " parks in the parks table.";
+	echo "There are " . Park::count() . " parks in the parks table.";
 
 
 // test Park::all()
 
-		var_dump(Park::all());
+		// var_dump(Park::all());
 
-		$allParks = Park::all();
+		// $allParks = Park::all();
 
-		echo "Park 1 details..." . PHP_EOL;
+		// echo "Park 1 details..." . PHP_EOL;
 
-		echo $allParks[0]->name . PHP_EOL;
-		echo $allParks[0]->location . PHP_EOL;
-		echo $allParks[0]->dateEstablished . PHP_EOL;
-		echo $allParks[0]->areaInAcres . PHP_EOL;
-		echo $allParks[0]->description . PHP_EOL;
+		// echo $allParks[0]->name . PHP_EOL;
+		// echo $allParks[0]->location . PHP_EOL;
+		// echo $allParks[0]->dateEstablished . PHP_EOL;
+		// echo $allParks[0]->areaInAcres . PHP_EOL;
+		// echo $allParks[0]->description . PHP_EOL;
 
 
 

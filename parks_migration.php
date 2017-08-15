@@ -1,12 +1,10 @@
  <?php
 
-// Set up the connection parameters for parks_db and parks_user.
-require_once "park_logins.php";
-// Require db_connect.php
-require_once "db_connect.php";
 require_once "Park.php";
 
-$dbc->exec("DROP TABLE IF EXISTS national_parks");
+Park::dbConnect();
+
+Park::$dbc->exec("DROP TABLE IF EXISTS national_parks");
 
 $statement = "CREATE TABLE IF NOT EXISTS national_parks (
 	id INT NOT NULL AUTO_INCREMENT,
@@ -18,5 +16,5 @@ $statement = "CREATE TABLE IF NOT EXISTS national_parks (
 	PRIMARY KEY (id)
 	);";
 
-$dbc->exec($statement);
+Park::$dbc->exec($statement);
 echo "table created".PHP_EOL;
