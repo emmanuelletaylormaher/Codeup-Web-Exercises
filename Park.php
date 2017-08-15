@@ -113,7 +113,7 @@ class Park
         $stmt->bindValue(":limit", (int) $limit, PDO::PARAM_INT);
         $stmt->bindValue(":offset", (int) $offset, PDO::PARAM_INT);
 
-        $stmt->ececute();
+        $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
@@ -152,6 +152,6 @@ class Park
         $newParkStmt->execute();
         // TODO: excute the statement and set the $id property of this object to
         //       the newly created id
-        $this->id = self::$connection->lastInsertId();
+        $this->id = self::$dbc->lastInsertId();
     }
 }

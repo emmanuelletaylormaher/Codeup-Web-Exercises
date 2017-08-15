@@ -7,11 +7,11 @@ require_once "../park_logins.php";
 
 function newPark($dbc)
 {
-	$name = Input::escape(Input::get("newname"));
-	$location = Input::escape(Input::get("newlocation"));
-	$dateEstablished = Input::escape(Input::get("newdate_established"));
-	$areaInAcres = Input::escape(Input::get("newarea_in_acres"));
-	$description = Input::escape(Input::get("newdescription"));
+	$name = Input::get("newname");
+	$location = Input::get("newlocation");
+	$dateEstablished = Input::get("newdate_established");
+	$areaInAcres = Input::get("newarea_in_acres");
+	$description = Input::get("newdescription");
 
 	$query = "INSERT INTO national_parks (name, location, date_established, area_in_acres, description) VALUES (:name, :location, :dateEstablished, :areaInAcres, :description)";
 	$newParkStmt= $dbc->prepare($query);
@@ -28,7 +28,7 @@ function newPark($dbc)
 function countParks($dbc) 
 {
 	$countQuery = "SELECT COUNT(*) FROM national_parks";
-	$stmt = $dbc->prepare($countQuery);
+	$stmt = $dbc->query($countQuery);
 	$count = (int) $stmt->fetchColumn();
 
 	return $count; 
