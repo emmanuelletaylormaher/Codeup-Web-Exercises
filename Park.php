@@ -48,16 +48,22 @@ class Park
         if (! is_null(self::$dbc)) {
             return;
         }
-        self::$dbc = require 'dbc.php';
+        self::$dbc = require 'park_logins.php';
     }
 
     /**
      * returns the number of records in the database
      */
-    public static function count() {
+    public static function count($dbc) {
         // TODO: call dbConnect to ensure we have a database connection
+        dbConnect();
         // TODO: use the $dbc static property to query the database for the
         //       number of existing park records
+        $query = "SELECT COUNT(*) FROM national_parks";
+        $stmt = $dbc->prepare($query);
+        $count = (int) $stmt->fetchColumn();
+
+        return $count;
     }
 
     /**
@@ -65,6 +71,7 @@ class Park
      */
     public static function all() {
         // TODO: call dbConnect to ensure we have a database connection
+        dbConnect();
         // TODO: use the $dbc static property to query the database for all the
         //       records in the parks table
         // TODO: iterate over the results array and transform each associative
@@ -77,6 +84,7 @@ class Park
      */
     public static function paginate($pageNo, $resultsPerPage = 4) {
         // TODO: call dbConnect to ensure we have a database connection
+        dbConnect();
         // TODO: calculate the limit and offset needed based on the passed
         //       values
         // TODO: use the $dbc static property to query the database with the
@@ -103,6 +111,7 @@ class Park
      */
     public function insert() {
         // TODO: call dbConnect to ensure we have a database connection
+        dbConnect();
         // TODO: use the $dbc static property to create a perpared statement for
         //       inserting a record into the parks table
         // TODO: use the $this keyword to bind the values from this object to
