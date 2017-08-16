@@ -14,6 +14,13 @@ function newPark($dbc)
 	$areaInAcres = Input::escape(Input::get("newarea_in_acres"));
 	$description = Input::escape(Input::get("newdescription"));
 
+	$dateEstablished - date("Y-m-d", strtotime($dateEstablished));
+
+	if(!is_numeric($area_in_acres)) {
+		echo "Area in acres must be numeric!";
+		return;
+	}
+
 	$newPark = new Park();
 	$newPark->name = $name;
 	$newPark->location = $location;
@@ -43,6 +50,12 @@ function retrieveParks($dbc, $limit = 2, $offset = 0)
 
 function pageController($dbc)
 {
+	$data = [];
+
+	if (!empty($_POST)) {
+		newPark($dbc);
+	}
+	
 	$message = "";
 	$page=Input::escape(Input::get("page", 1));
 	$recordsPerPage = Input::escape(Input::get("recordsPerPage", 4));
@@ -61,9 +74,6 @@ function pageController($dbc)
     $data["message"] = $message;
 
 
-	if (!empty($_POST)) {
-		newPark($dbc);
-	}
 
 	return $data;
 }
@@ -97,11 +107,11 @@ extract(pageController($dbc));
 		<section class="row text-center">
 					<?php foreach ($parks as $park): ?>
 						<div class="col-md-12 panel panel-default">
-			                <h4><?= $park['name'] ?></h4>
-			                <p>Location: <?= $park['location'] ?></p>
-			                <p>Date Established: <?= $park['date_established'] ?></p>
-			                <p>Area in acres: <?= $park['area_in_acres'] ?></p>
-			                <p>Description: <?=$park["description"] ?></p>
+			                <h4><?= Input::escape($park->name) ?></h4>
+			                <p>Location: <?= Input::escape($park->location) ?></p>
+			                <p>Date Established: <?= Input::escape($park->date_established) ?></p>
+			                <p>Area in acres: <?= Input::escape($park->area_in_acres) ?></p>
+			                <p>Description: <?= Input::escape($park->description) ?></p>
 			            </div>
 					<?php endforeach ?>
 			</section>
