@@ -3,6 +3,7 @@
 class Model
 {
 	private $attributes = [];
+	protected static $table = "testing";
 
 	public function __set($name, $value)
 	{
@@ -14,5 +15,12 @@ class Model
 		if (array_key_exists($name, $this->attributes)) {
 			return $this->attributes[$name];
 		}
+
+		return null;
+	}
+
+	public static function getTableName()
+	{
+		return static::$table;
 	}
 }
