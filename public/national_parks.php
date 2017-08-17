@@ -76,43 +76,60 @@ extract(pageController());
 <body>
 	<main class="container">
 		<h1> check out some national parks!! </h1>
-		<div class="row text-center">
-            
-            <a class="col-lg-4 btn btn-secondary" href="?page=<?=$page?>&recordsPerPage=4">4 Per Page</a>
-            <a class="col-lg-4 btn btn-secondary" href="?page=1&recordsPerPage=10">10 Per Page</a>
-            <a class="col-lg-4 btn btn-secondary" href="?page=1&recordsPerPage=12">12 Per Page</a>
-            
-        </div>
-		<section class="row text-center">
-					<?php foreach ($parks as $park): ?>
-						<div class="col-md-12 panel panel-default">
-			                <h4><?= Input::escape($park->name) ?></h4>
-			                <p>Location: <?= Input::escape($park->location) ?></p>
-			                <p>Date Established: <?= Input::escape($park->date_established) ?></p>
-			                <p>Area in acres: <?= Input::escape($park->area_in_acres) ?></p>
-			                <p>Description: <?= Input::escape($park->description) ?></p>
-			            </div>
-					<?php endforeach ?>
-			</section>
-			<section>
-				<form method="GET" action="national_parks.php" class="pagination">
-					<button class="btn" <?php if ($page == 1) {?> style="display:none;" <?php }else {?> style="display:initial;" <?php } ?> name="page" value=<?= $page - 1 ?> >previous</button>
-					<button class="btn" <?php if ($page == 15) {?> style="display:none;" <?php }else {?> style="display:initial;" <?php } ?> name="page" value=<?= $page + 1 ?> >next</button>
-				</form>
-			</section>
+		<section class="col-md-8">
+			<div class="row text-center">
+	            
+	            <a class="col-lg-4 btn btn-secondary" href="?page=<?=$page?>&recordsPerPage=4">4 Per Page</a>
+	            <a class="col-lg-4 btn btn-secondary" href="?page=1&recordsPerPage=10">10 Per Page</a>
+	            <a class="col-lg-4 btn btn-secondary" href="?page=1&recordsPerPage=12">12 Per Page</a>
+	            
+	        </div>
+			<section class="row text-center">
+						<?php foreach ($parks as $park): ?>
+							<div class="col-md-12 panel panel-default">
+				                <h4><?= Input::escape($park->name) ?></h4>
+				                <p>Location: <?= Input::escape($park->location) ?></p>
+				                <p>Date Established: <?= Input::escape($park->date_established) ?></p>
+				                <p>Area in acres: <?= Input::escape($park->area_in_acres) ?></p>
+				                <p>Description: <?= Input::escape($park->description) ?></p>
+				            </div>
+						<?php endforeach ?>
+				</section>
+				<section>
+					<form method="GET" action="national_parks.php" class="pagination">
+						<button class="btn" <?php if ($page == 1) {?> style="display:none;" <?php }else {?> style="display:initial;" <?php } ?> name="page" value=<?= $page - 1 ?> >previous</button>
+						<button class="btn" <?php if ($page == 15) {?> style="display:none;" <?php }else {?> style="display:initial;" <?php } ?> name="page" value=<?= $page + 1 ?> >next</button>
+					</form>
+				</section>
+		</section>
+			<section class= "col-sm-4">
 			<h3>add your own park!</h3>
-			<section class= "container col-sm-12">
 				<form method="POST" action="national_parks.php">
-					<label>Name:</label>
-					<input type="text" name="newname">
-					<label>Location:</label>
-					<input type="text"  name="newlocation">
-					<label>Date Established:</label>
-					<input type="text" name="newdate_established">
-					<label>Area in Acres:</label>
-					<input type="text" name="newarea_in_acres">
-					<label>Description</label>
-					<input type="text" name="newdescription">
+					<div class="form-group">
+						<label>Name:</label>
+						<br>
+						<input type="text" name="newname">
+					</div>
+					<div class="form-group">
+						<label>Location:</label>
+						<br>
+						<input type="text"  name="newlocation">
+					</div>
+					<div class="form-group">
+						<label>Date Established:</label>
+						<br>
+						<input type="text" name="newdate_established">
+					</div>
+					<div class="form-group">
+						<label>Area in Acres:</label>
+						<br>
+						<input type="text" name="newarea_in_acres">
+					</div>
+					<div class="form-group">
+						<label>Description</label>
+						<br>
+						<input type="text" name="newdescription">	
+					</div>
 					<button class="btn">Submit!</button>
 				</form>
 			</section>
