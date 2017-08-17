@@ -66,19 +66,34 @@ abstract class Model
     /** Store the object in the database */
     public function save()
     {
+        self::dbConnect();
         // @TODO: Ensure there are values in the attributes array before attempting to save
+        if (in_array(self::$value,self::$attributes[$name])) {
+            self::insert();
+        } else {
+            self::update();
+        }
 
         // @TODO: Call the proper database method: if the `id` is set this is an update, else it is a insert
     }
+
+    // Model::find($id): accepts the id of a record, and returns an instance of the model class that represents the record with that id
+    public function find($table, $id)
+    {
+        $findQuery = "SELECT * from {$table} WHERE ID = {$id}";
+        $findStmt = self::$dbc->prepare($query);
+        $findStmt->execute();
+    }
+
+    // $park->update(): update an existing record in the database with new values
+    //  $model->delete(): remove a record from the database
 
     /**
      * Insert new entry into database
      *
      * NOTE: Because this method is abstract, any child class MUST have it defined.
      */
-    protected abstract function insert(){
-        
-    }
+    protected abstract function insert();
 
     /**
      * Update existing entry in database

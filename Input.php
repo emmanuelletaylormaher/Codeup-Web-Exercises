@@ -67,7 +67,7 @@ class Input
         if (!is_numeric($input)){
             throw new Exception("Must be a number");
         } elseif (empty($input)) {
-            threw new Exception("Cannot be empty");
+            throw new Exception("Cannot be empty");
         }
         return input;
     }
@@ -75,7 +75,7 @@ class Input
     public static function getDate($key){
         $input = self::get($key);
         if (!is_numeric(strtotime($input))) {
-            threw new Exception("Must be a valid date");
+            throw new Exception("Must be a valid date");
         } else {
             $date = new DateTime();
             $date->setTimestamp(strtotime($input));

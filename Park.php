@@ -1,5 +1,5 @@
 <?php
-
+// require_once "Model1.php";
 /**
  * A Class for interacting with the national_parks database table
  *
@@ -29,7 +29,7 @@
  *      $park->insert();
  *
  */
-class Park
+class Park 
 {
 
     ///////////////////////////////////
